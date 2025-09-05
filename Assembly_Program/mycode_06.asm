@@ -1,51 +1,33 @@
 .model small
 .stack 100h
+.data
+    num1 dw 5
+    num2 dw 3
+    num3 dw 1
+    sum  dw ?           ; to store result
+
 .code
 main proc
-    mov ax,@data
-    mov ds,ax        ; Initialize data segment (if needed)
+    mov ax, @data
+    mov ds, ax
 
-    ; ----- Input first number -----
-    mov ah,1
-    int 21h
-    sub al,48
-    mov bl,al        ; Store first number in BL
+    ; add three numbers
+    mov ax, num1
+    add ax, num2
+    add ax, num3
+    mov sum, ax
 
-    ; ----- Input second number -----
-    mov ah,1
-    int 21h
-    sub al,48
-    mov bh,al        ; Store second number in BH
+    ; convert result to ASCII (only works for single-digit)
+    mov ax, sum
+    add al, 48
+    mov dl, al
 
-    ; ----- Input third number -----
-    mov ah,1
-    int 21h
-    sub al,48
-    mov cl,al        ; Store third number in CL
-
-    ; ----- Input fourth number -----
-    mov ah,1
-    int 21h
-    sub al,48
-    mov dl,al        ; Store fourth number in DL
-
-    ; ----- Add numbers -----
-    mov al, bl
-    add al, bh
-    add al, cl
-    add al, dl       ; AL now has sum
-
-    ; ----- Convert sum to ASCII -----
-    add al,48
-
-    ; ----- Print result -----
-    mov ah,2
-    mov dl,al
+    ; display result
+    mov ah, 2
     int 21h
 
-    ; ----- Exit program -----
-    mov ah,4Ch
+    ; exit program
+    mov ah, 4Ch
     int 21h
-
 main endp
 end main
