@@ -20,10 +20,10 @@ main proc
     mov ah, 1
     int 21h
     mov msg1, al           ; Store it in msg1
+    
     mov ah, 2     ; DOS function to display a single character
     mov dl, 10    ; LF = move down one line
-    int 21h
-    
+    int 21h 
     mov dl, 13    ; CR = return to column 1
     int 21h
     
@@ -37,4 +37,5 @@ exit:
     int 21h
 main endp
 end main
+
 
